@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Layout } from "../components/common/Layout";
 import { CandidateList } from "../components/dashboard/CandidateList";
 import { RatingForm } from "../components/dashboard/RatingForm";
 import { SummaryGenerator } from "../components/dashboard/SummaryGenerator";
 import { Candidate } from "../types";
-import { AIEvaluation } from '../components/dashboard/AIEvaluation';
+import { AIEvaluation } from "../components/dashboard/AIEvaluation";
 
 export const Dashboard: React.FC = () => {
+  const [collapsed, setCollapsed] = useState(true);
   const [selectedCandidate, setSelectedCandidate] =
     React.useState<Candidate | null>(null);
 
@@ -15,13 +16,13 @@ export const Dashboard: React.FC = () => {
       setSelectedCandidate({
         ...selectedCandidate,
         aiScore: score,
-        summary
+        summary,
       });
     }
   };
 
   return (
-    <Layout>
+    <Layout collapsed={collapsed} setCollapsed={setCollapsed}>
       <div className="dashboard-container">
         <div className="dashboard-grid">
           {/* Left Panel - Candidate List */}
@@ -43,7 +44,7 @@ export const Dashboard: React.FC = () => {
                     onSummaryGenerate={(summary) => {
                       setSelectedCandidate({
                         ...selectedCandidate,
-                        summary
+                        summary,
                       });
                     }}
                   />

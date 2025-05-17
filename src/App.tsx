@@ -12,6 +12,7 @@ import { Register } from "./frontend/components/auth/Register";
 import { Dashboard } from "./frontend/pages/Dashboard";
 import { Candidates } from "./frontend/pages/Candidates";
 import { Settings } from "./frontend/pages/Settings";
+import { Positions } from "./frontend/pages/Positions";
 import "./frontend/styles/main.css";
 import "./frontend/styles/theme.css";
 import { useAuth } from "./frontend/context/AuthContext";
@@ -45,6 +46,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Settings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/positions"
+            element={
+              <ProtectedRoute>
+                <Positions />
               </ProtectedRoute>
             }
           />

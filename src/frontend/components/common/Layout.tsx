@@ -4,14 +4,16 @@ import { Sidebar } from './Sidebar';
 
 interface LayoutProps {
   children: React.ReactNode;
+  collapsed: boolean;
+  setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
+export const Layout: React.FC<LayoutProps> = ({ children, collapsed, setCollapsed }) => {
   return (
     <div className="app-container">
-      <Header />
+      <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
       <div className="main-container">
-        <Sidebar />
+        <Header />
         <main className="content">
           {children}
         </main>

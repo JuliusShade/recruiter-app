@@ -1,40 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { supabase } from '../../utils/supabaseClient';
+import { supabase } from "../../utils/supabaseClient";
 
-export const Sidebar: React.FC = () => {
+interface SidebarProps {
+  collapsed: boolean;
+  setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({
+  collapsed,
+  setCollapsed,
+}) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [collapsed, setCollapsed] = useState(() => {
-    // Read from localStorage on initial render
-    const stored = localStorage.getItem("sidebar-collapsed");
-    return stored === "true";
-  });
-
-  useEffect(() => {
-    // Save to localStorage whenever collapsed changes
-    localStorage.setItem("sidebar-collapsed", String(collapsed));
-  }, [collapsed]);
 
   const menuItems = [
     { path: "/dashboard", label: "Dashboard", icon: "📊" },
     { path: "/candidates", label: "Candidates", icon: "👥" },
+    { path: "/positions", label: "Positions", icon: "📋" },
     { path: "/settings", label: "Settings", icon: "⚙️" },
   ];
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    navigate('/login');
+    navigate("/login");
   };
 
   return (
-    <aside className={`sidebar${collapsed ? " collapsed" : ""}`}>
-      <button
-        className="sidebar-toggle"
-        onClick={() => setCollapsed(!collapsed)}
-      >
-        {collapsed ? "➡️" : "⬅️"}
-      </button>
+    <aside
+      className={`sidebar${collapsed ? " collapsed" : ""}`}
+      onMouseEnter={() => setCollapsed(false)}
+      onMouseLeave={() => setCollapsed(true)}
+    >
       <nav className="sidebar-nav">
         {menuItems.map((item) => (
           <Link

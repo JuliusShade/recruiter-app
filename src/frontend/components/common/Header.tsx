@@ -1,12 +1,14 @@
-import React from 'react';
+import React from "react";
 
 export const Header: React.FC = () => {
   return (
     <header className="header">
-      <div className="logo">
+      {/* Remove or comment out the logo/title */}
+      {/* <div className="logo">
         Recruiter Platform
-      </div>
-      <div className="header-right">
+      </div> */}
+      {/* Remove or comment out the recruiter name and notification */}
+      {/* <div className="header-right">
         <div className="notifications">
           <span className="notification-icon">🔔</span>
         </div>
@@ -14,7 +16,7 @@ export const Header: React.FC = () => {
           <span className="user-avatar">👤</span>
           <span className="user-name">Recruiter Name</span>
         </div>
-      </div>
+      </div> */}
     </header>
   );
 };
